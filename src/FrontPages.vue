@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <a-layout-header class="header">
+    <a-layout-header :class="'header'+(headerTransparent?' transparent':'')">
       <div class="logo"></div>
       <a-menu
         class="menu"
@@ -33,11 +33,15 @@ import $ from 'jquery'
 export default class FrontPages extends Vue {
   name = "FrontPages";
   menuSelectKeys = [];
+  headerTransparent = true;
 
   mounted() {
     this.getMenuDefSelectIndex();
     $('#loading').fadeOut();
   }
+
+
+
   getMenuDefSelectIndex() {
     let path = this.$route.path;
     if(path == '/login') this.menuSelectKeys = ['1'];

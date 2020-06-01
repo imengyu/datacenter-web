@@ -25,6 +25,7 @@ export default {
 
   setCookie,
   setCookieWithPath,
+  setCookieWithPathAndExpireSec,
   getCookie,
   delCookie,
 }
@@ -164,6 +165,12 @@ function setCookieWithPath(name : string, value : string, path : string) {
   var Days = 30;
   var exp = new Date();
   exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+  document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString() + ";path=" + path;
+}
+function setCookieWithPathAndExpireSec(name : string, value : string, path : string, expireSec : number) {
+  var Days = 30;
+  var exp = new Date();
+  exp.setTime(exp.getTime() + expireSec * 1000);
   document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString() + ";path=" + path;
 }
 /**

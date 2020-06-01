@@ -1,4 +1,4 @@
-import Const from '../../const/Const'
+import config from '../config'
 import { commonRequest, axios } from './../common';
 
 export default {
@@ -7,19 +7,19 @@ export default {
    * @param loginData 
    */
   login(loginData) {
-    return commonRequest(axios.post(Const.API_ROOT + '/auth', loginData));
+    return commonRequest(axios.post(config.getApiPath() + '/auth', loginData));
   },
   /**
    * 退出登录
    */
   logout() {
-    return commonRequest(axios.post(Const.API_ROOT + '/auth-end'));
+    return commonRequest(axios.get(config.getApiPath() + '/auth/end'));
   },
   /**
    * 获取当前用户登录信息
    */
   getAuthInfo() {
-    return commonRequest(axios.get(Const.API_ROOT + '/auth'));
+    return commonRequest(axios.get(config.getApiPath() + '/auth'));
   },
   /**
    * 获取用户信息
@@ -27,7 +27,7 @@ export default {
    */
   getUserInfo(userId : number) {
     return commonRequest(
-      axios.get(Const.API_ROOT + `/user/${userId}`), 
+      axios.get(config.getApiPath() + `/user/${userId}`), 
     );
   },
 }

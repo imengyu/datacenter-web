@@ -34,7 +34,7 @@
         />
         <a-dropdown>
           <div class="admin-head">
-            <user-head v-if="authed && authedUserInfo" :src="authedUserInfo.head_img"></user-head>
+            <user-head v-if="authed && authedUserInfo" :src="authedUserInfo.userhead"></user-head>
             <span v-if="authed && authedUserInfo">{{authedUserInfo.name}}</span>
           </div>
           <a-menu slot="overlay">

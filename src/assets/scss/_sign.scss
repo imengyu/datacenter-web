@@ -12,28 +12,30 @@
   right: 0;
   bottom: 0;
   z-index: -1;
-  background-image: url('../images/i0.jpg');
+  background-image: url('../images/login_bg.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
 .log-outer {
   display: flex;
-  justify-content: center;
-  align-content: flex-start;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0 100px;
+  height: 100%;
 }
 .log-box {
   position: relative;
+  display: inline-block;
   background-color: white;
   padding: 35px 25px;
   border-radius: 6px;
   box-shadow: 0 0 10px 2px rgba(0,0,0,0.1);
   width: 400px;
-  margin-top: 35px;
+  height: auto;
   
 
   &.authed {
-    height: 400px;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -87,6 +89,12 @@
   .log-box {
     margin-top: 25px;
     width: 70%;
+  }
+  .log-outer {
+    display: flex;
+    justify-content: center;
+    justify-content: center;
+    margin: 0;
   }
 }
 

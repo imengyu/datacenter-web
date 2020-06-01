@@ -47,7 +47,7 @@ export function init(instance : AxiosInstance) {
  * @param data 
  */
 export function getCommonApiResult(data) {
-  return new CommonApiResult(data.success, data.status, data.msg, data.data);
+  return new CommonApiResult(data.success, data.code, data.message, data.data);
 }
 /**
  * 通用请求
@@ -82,8 +82,8 @@ export function commonResponse(promise : Promise<AxiosResponse>,
     }
     else {
       if(process.env.NODE_ENV == 'development') 
-        console.error('[API Debugger] Request ' + response.config.url + ' got error from server : ' + response.data.msg + ' (' + response.data.status + ')');
-      reject(new CommonApiError(false, response.data.msg, getCommonApiResult(response.data)));
+        console.error('[API Debugger] Request ' + response.config.url + ' got error from server : ' + response.data.message + ' (' + response.data.code + ')');
+      reject(new CommonApiError(false, response.data.message, getCommonApiResult(response.data)));
     }
   }).catch((e) => {
     if(process.env.NODE_ENV == 'development') 

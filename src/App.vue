@@ -36,6 +36,7 @@ export default class App extends Vue {
   @Watch("$route")
   onRouteChanged() {
     if(this.authed){ 
+      
       this.loadAuthInfoAutoDely();
     }else{
       this.loadAuthInfo();

@@ -22,7 +22,6 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'FrontPages',
       component: FrontPages,
       children: [
         {
@@ -65,7 +64,6 @@ export default new Router({
     },
     {
       path: '/admin/',
-      name: 'BackPages',
       component: BackPages,
       children: [
         {

@@ -1,6 +1,5 @@
 <template>
   <div class="text-center about">
-    <img src="../assets/images/i0.png" />
   </div>
 </template>
 
@@ -11,7 +10,9 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 export default class About extends Vue {
   name = "About";
 
-
+  mounted() {
+    (<any>this.$parent).headerTransparent = false;
+  }
 
 }
 </script>

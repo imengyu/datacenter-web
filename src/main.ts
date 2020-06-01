@@ -44,7 +44,7 @@ function createApp() {
     // 每次切换页面时，调用进度条
     NProgress.start();
 
-    if(!to.meta.noLoading) $('#loading').fadeIn('fast');
+    if(!to.meta.noLoading) $('#loading').fadeIn();
     if (to.meta.title) document.title = to.meta.title + ' - Mini IoT Platform';
     else document.title = 'Mini IoT Platform';
 
@@ -54,13 +54,14 @@ function createApp() {
   router.afterEach(() => {  
     // 在即将进入新的页面组件前，关闭掉进度条
     NProgress.done();
-    if($('#loading').is(':visible')) $('#loading').fadeOut('fast');
+    $('#loading').fadeOut();
   })
 
 }
 function initAxios() : AxiosInstance {
   let instance = axios.create();
 
+  instance.defaults.withCredentials = true;
   /* Axios 响应的拦截器 */
   instance.interceptors.response.use(function (response) { 
     return response; 

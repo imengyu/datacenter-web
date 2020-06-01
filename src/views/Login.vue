@@ -59,16 +59,10 @@
           >
             记住我
           </a-checkbox>
-          <a class="login-form-forgot" href="javascript:;" @click="registerTip">
-            忘记密码
-          </a>
+
           <a-button type="primary" html-type="submit" class="login-form-button" :loading="signInSubmiting">
             {{signInSubmiting?'正在登录':'登录'}}
           </a-button>
-          没有账号?
-          <a href="javascript:;" @click="registerTip">
-            立即注册
-          </a>
         </a-form-item>
       </a-form>
     </div>
@@ -84,6 +78,9 @@ import { State } from 'vuex-class';
 import md5 from 'md5';
 import api, { CommonApiError, CommonApiResult } from "../api";
 import UserHead from '../components/UserHead.vue';
+import { WrappedFormUtils } from "ant-design-vue/types/form/form";
+import CommonUtils from "../utils/CommonUtils";
+import constConfig from "../const/Const";
 
 @Component(<any>{
   components: {
@@ -92,7 +89,7 @@ import UserHead from '../components/UserHead.vue';
 })
 export default class Login extends Vue {
   name = "Login";
-  form = null;
+  form : WrappedFormUtils | null = null;
   signInSubmiting = false;
   signInRedirecting = false;
 
@@ -102,62 +99,68 @@ export default class Login extends Vue {
 
   mounted() {
     this.form = this.$form.createForm(this, <any>{ name: 'normal_login' });
+    (<any>this.$parent).headerTransparent = true;
   }
   handleSubmit(e) {
     if(e) e.preventDefault();
-    this.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        this.signInSubmiting = true;
-        var valuesSolved = {
-          code: values.username,
-          password: md5(values.password),
-          remember: values.remember,
-        }
-        api.auth.login(valuesSolved).then((data : CommonApiResult) => {    
-          var userId = data.data.userId;
-          if(data.code == 200) {
-
-            //重载信息
-            this.$store.dispatch('global/requestReloadAuthStatus');
-            this.signInSubmiting = false;
-            this.signInRedirecting = true;
-
-            setTimeout(() =>{
-              this.doRedirectBack();
-            }, 800)
-            
+    if(this.form) {
+      this.form.validateFieldsAndScroll((err, values) => {
+        if (!err) {
+          this.signInSubmiting = true;
+          var valuesSolved = {
+            name: values.username,
+            password: md5(values.password),
+            remember: values.remember,
           }
-          
-        }).catch((errData : CommonApiError) => {
-          this.signInSubmiting = false;
-          if(errData.networkError) {
-            this.$error({ title: '登录失败', content: '请检查您的网络连接？' + errData.errorMessage, });
-          }else {
-            if(errData.errorApiData.code == 462)
-              this.$error({
-                title: '登录失败',
-                content: '用户名或密码错误'
-              })
-            else if(errData.errorApiData.code == 463)
-              this.$error({
-                title: '登录失败',
-                content: '您已被封禁，无法登录，请联系管理员解封'
-              })
-            else{
-              const h = this.$createElement;
-              this.$error({
-                title: '登录失败',
-                content: h('div', [
-                  h('span', { style: 'text-ailgn: center' }, errData.errorApiData.message),
-                ]),
-              });
-              this.form.resetFields();
+          api.auth.login(valuesSolved).then((data : CommonApiResult) => {    
+            var userId = data.data.userId;
+            if(data.code == 200) {
 
+              //设置Cookie
+              CommonUtils.setCookieWithPathAndExpireSec(data.data.authTokenName, data.data.authToken, new URL(api.config.getApiPath()).host, data.data.expireSecond);
+
+              //重载信息
+              this.$store.dispatch('global/requestReloadAuthStatus');
+              this.signInSubmiting = false;
+              this.signInRedirecting = true;
+
+              setTimeout(() =>{
+                this.doRedirectBack();
+              }, 800)
+              
             }
-          }
-        })
-      }
-    });
+            
+          }).catch((errData : CommonApiError) => {
+            this.signInSubmiting = false;
+            if(errData.networkError) {
+              this.$error({ title: '登录失败', content: '请检查您的网络连接？' + errData.errorMessage, });
+            }else {
+              if(errData.errorApiData.code == 462)
+                this.$error({
+                  title: '登录失败',
+                  content: '用户名或密码错误'
+                })
+              else if(errData.errorApiData.code == 463)
+                this.$error({
+                  title: '登录失败',
+                  content: '您已被封禁，无法登录，请联系管理员解封'
+                })
+              else{
+                const h = this.$createElement;
+                this.$error({
+                  title: '登录失败',
+                  content: h('div', [
+                    h('span', { style: 'text-ailgn: center' }, errData.errorApiData.message),
+                  ]),
+                });
+                if(this.form) { this.form.resetFields(); }
+
+              }
+            }
+          })
+        }
+      });
+    }
   }
 
   doRedirectBack() {
@@ -167,13 +170,7 @@ export default class Login extends Vue {
       this.$router.push('/admin/');
   }
   goSignOut() {
-    this.$router.push({path:'/logout'});
-  }
-  registerTip(){
-    this.$info({
-      title: '提示',
-      content: '本系统没有注册功能，这里有测试账号：用户名：admin 密码：admin，另外书本上的账号也可以用'
-    })
+    this.$router.push({ path: '/logout' });
   }
 }
 </script>

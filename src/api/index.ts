@@ -1,4 +1,4 @@
-import Const from '../const/Const'
+import config from './config'
 import { commonRequest, getAxios, init  } from './common';
 
 import auth from './moduls/auth'
@@ -17,9 +17,7 @@ const api = {
   
   /* Un moduled api */
 
-  getApiRoot() {
-    return commonRequest(getAxios().get(Const.API_ROOT));
-  },
+  config
 }
 
 export type LoadStatus = 'notload'|'success'|'failed'|'loading' ;

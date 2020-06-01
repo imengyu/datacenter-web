@@ -1,0 +1,11 @@
+.ant-layout-header.transparent {
+  background-color: transparent;
+
+  .ant-menu {
+    background-color: transparent;
+
+    .ant-menu-item:not(.ant-menu-item-selected) {
+      text-shadow: 1px 2px 10px rgba(0,0,0,0.7);
+    }
+  }
+}

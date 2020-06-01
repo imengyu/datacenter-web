@@ -14,6 +14,7 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { State } from 'vuex-class';
 import md5 from 'md5';
 import api, { CommonApiError, CommonApiResult } from "../api";
+import CommonUtils from "../utils/CommonUtils";
 
 @Component
 export default class Logout extends Vue {
@@ -24,6 +25,7 @@ export default class Logout extends Vue {
   exitSending = true;
  
   mounted() {
+    (<any>this.$parent).headerTransparent = true;
     this.logout();
   }
 
@@ -35,10 +37,14 @@ export default class Logout extends Vue {
   }
 
   logout() {
-    api.auth.logout().then(() => {
+    api.auth.logout().then((data) => {
+      //清除cookie
+      CommonUtils.delCookie(data.data.authToken);
+      
       this.exitSending = false;
       this.$store.dispatch('global/resetAuthStatus');
       this.doRedirectBack();
+
     }).catch((e : CommonApiError) => {
       this.exitSending = false;
       this.exitText = '无法退出登录';

@@ -1,4 +1,4 @@
-import Const from '../const/Const'
+import config from './config'
 import { commonRequest, axios } from './common';
 import CommonUtils from '../utils/CommonUtils';
 
@@ -59,7 +59,7 @@ export class CommonRestfulRequest {
    * @param searchKeys 搜索筛选键值
    */
   public getPage(page : number, pageSize : number, querys = {}, appendParams = [], prependParams = []) {
-    return commonRequest(axios.get(Const.API_ROOT + `/${this.subResKey}` +
+    return commonRequest(axios.get(config.getApiPath() + `/${this.subResKey}` +
       buildParams(prependParams) + 
       `/${page}/${pageSize}/` + 
       buildParams(appendParams) + 
@@ -72,7 +72,7 @@ export class CommonRestfulRequest {
    */
   public get(id : number, querys = {}, appendParams = [], prependParams = []) {
     return commonRequest(
-      axios.get(Const.API_ROOT + `/${this.subResKey}` + 
+      axios.get(config.getApiPath() + `/${this.subResKey}` + 
         buildParams(prependParams) + `/${id}` + buildParams(appendParams) + 
         buildSearchKeyPars(querys)));
   }
@@ -81,7 +81,7 @@ export class CommonRestfulRequest {
    * @param data 资源数据
    */
   public add(data : any, querys = {}, appendParams = []) {
-    return commonRequest(axios.post(Const.API_ROOT + `/${this.subResKey}` + buildParams(appendParams) + 
+    return commonRequest(axios.post(config.getApiPath() + `/${this.subResKey}` + buildParams(appendParams) + 
       buildSearchKeyPars(querys), data));
   }
   /**
@@ -90,7 +90,7 @@ export class CommonRestfulRequest {
    * @param data 资源数据
    */
   public update(id : number, data : any, querys = {}, appendParams = [], prependParams = []) {
-    return commonRequest(axios.put(Const.API_ROOT + `/${this.subResKey}` + 
+    return commonRequest(axios.put(config.getApiPath() + `/${this.subResKey}` + 
       buildParams(prependParams) + `/${id}` + buildParams(appendParams) + 
       buildSearchKeyPars(querys), data));
   }
@@ -99,7 +99,7 @@ export class CommonRestfulRequest {
    * @param id 资源ID
    */
   public delete(id : number, querys = {}, appendParams = [], prependParams = []) {
-    return commonRequest(axios.delete(Const.API_ROOT + `/${this.subResKey}` + 
+    return commonRequest(axios.delete(config.getApiPath() + `/${this.subResKey}` + 
       buildParams(prependParams) + `/${id}` + buildParams(appendParams) + 
       buildSearchKeyPars(querys)));
   }
