@@ -51,6 +51,7 @@ export default {
       else this.$router.push({ path: '/' });
     },
     init() {
+      this.$store.dispatch('global/setHeaderTransparent', false);
       $('#loading').fadeOut();
       this.timer = setInterval(() => {
         if(this.sec > 0) this.sec --;

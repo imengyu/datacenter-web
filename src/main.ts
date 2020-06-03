@@ -7,6 +7,7 @@ import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 import NProgress from 'nprogress'
 import $ from 'jquery'
 import api from './api';
+import EmptyView from './components/EmptyView.vue';
 
 import 'ant-design-vue/dist/antd.css';
 import './utils/BaseExtends'
@@ -38,7 +39,9 @@ function createApp() {
     store,
     render: h => h(App)
   })
-    
+
+  initCompoents();
+
   //当路由进入前
   router.beforeEach((to, from , next) => {
     // 每次切换页面时，调用进度条
@@ -82,6 +85,9 @@ function initAxios() : AxiosInstance {
   //ApiAutoAuthUtils.autoCheckTime();
   
   return instance;
+}
+function initCompoents() {
+  Vue.component('empty-view', EmptyView);
 }
 
 createApp();

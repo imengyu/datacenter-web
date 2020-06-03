@@ -1,6 +1,4 @@
 
-
-
 let ConstConfig = {
   API_PATH: (typeof process.env.API_PATH === 'string' ? process.env.API_PATH : '') ,
   API_HOST: (typeof process.env.API_HOST === 'string' ? process.env.API_HOST : ''),

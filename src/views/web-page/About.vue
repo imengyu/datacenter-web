@@ -11,7 +11,7 @@ export default class About extends Vue {
   name = "About";
 
   mounted() {
-    (<any>this.$parent).headerTransparent = false;
+    this.$store.dispatch('global/setHeaderTransparent', false);
   }
 
 }

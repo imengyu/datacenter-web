@@ -76,11 +76,11 @@
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { State } from 'vuex-class';
 import md5 from 'md5';
-import api, { CommonApiError, CommonApiResult } from "../api";
-import UserHead from '../components/UserHead.vue';
+import api, { CommonApiError, CommonApiResult } from "../../api";
+import UserHead from '../../components/UserHead.vue';
 import { WrappedFormUtils } from "ant-design-vue/types/form/form";
-import CommonUtils from "../utils/CommonUtils";
-import constConfig from "../const/Const";
+import CommonUtils from "../../utils/CommonUtils";
+import constConfig from "../../const/Const";
 
 @Component(<any>{
   components: {
@@ -99,7 +99,7 @@ export default class Login extends Vue {
 
   mounted() {
     this.form = this.$form.createForm(this, <any>{ name: 'normal_login' });
-    (<any>this.$parent).headerTransparent = true;
+    this.$store.dispatch('global/setHeaderTransparent', true);
   }
   handleSubmit(e) {
     if(e) e.preventDefault();

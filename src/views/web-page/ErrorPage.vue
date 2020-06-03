@@ -40,6 +40,7 @@ export default {
       this.$router.push({ path: '/' });
     },
     init() {
+      this.$store.dispatch('global/setHeaderTransparent', false);
       this.errStatus = parseInt(this.$route.query.status);
       if(this.errStatus == 404) {
         document.title = '404 未找到 - 梦欤的管理系统项目';

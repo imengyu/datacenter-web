@@ -5,6 +5,7 @@
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from "vue-property-decorator";
 import CommonUtils from "../utils/CommonUtils";
+import StringUtils from "../utils/StringUtils";
 
 @Component
 export default class UserHead extends Vue {
@@ -20,7 +21,7 @@ export default class UserHead extends Vue {
 
   loadSrc() {
     if(CommonUtils.isNullOrEmpty(this.src)) this.srcSolved = require('../assets/images/head-default.png');
-    else this.srcSolved = location.origin + '/' + this.src;
+    else this.srcSolved = (StringUtils.isUrl(this.src) ? '' : (location.origin + '/')) + this.src;
   }
 
   @Watch('src')

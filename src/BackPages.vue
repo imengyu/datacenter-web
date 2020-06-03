@@ -3,25 +3,9 @@
     <a-layout-sider collapsible v-model="collapsed">
       <div class="logo"></div>
       <a-menu theme="dark" mode="inline" v-model="menuSelectKeys" @click="menuClicked">
-        <a-menu-item key="1">
-          <a-icon type="home" />
-          <span>后台首页</span>
-        </a-menu-item>
-        <a-menu-item key="2">
-          <a-icon type="user" />
-          <span>客户管理</span>
-        </a-menu-item>
-        <a-menu-item key="3">
-          <a-icon type="user-add" />
-          <span>客户拜访</span>
-        </a-menu-item>
-        <a-menu-item key="4">
-          <a-icon type="setting" />
-          <span>系统设置</span>
-        </a-menu-item>
-        <a-menu-item key="5">
-          <a-icon type="arrow-left" />
-          <span>退出登录</span>
+        <a-menu-item v-for="(item, i) in appMenu" :key="i.toString()">
+          <a-icon :type="item.icon" />
+          <span>{{item.title}}</span>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>
@@ -103,17 +87,61 @@ export default class BackPages extends Vue {
     this.getMenuDefSelectIndex();
   }
 
+  appMenu = [
+    {
+      path: '/admin/',
+      title: '数据总览',
+      icon: 'home'
+    },
+    {
+      path: '/admin/products',
+      title: '产品管理',
+      icon: 'appstore'
+    },
+    {
+      path: '/admin/devices',
+      title: '设备管理',
+      icon: 'control'
+    },
+    {
+      path: '/admin/groups',
+      title: '分组管理',
+      icon: 'tags'
+    },
+    {
+      path: '/admin/auth-types',
+      title: '认证管理',
+      icon: 'unlock'
+    },
+    {
+      path: '/admin/get-data',
+      title: '数据获取',
+      icon: 'bar-chart'
+    },
+    {
+      path: '/admin/setting',
+      title: '系统设置',
+      icon: 'setting'
+    },
+    {
+      path: '/logout',
+      title: '退出登录',
+      icon: 'arrow-left'
+    },
+  ];
+
   getMenuDefSelectIndex() {
     let path = this.$route.path;
-    if(path == '/admin/') this.menuSelectKeys = ['1'];
-    else if(path == '/admin/crm') this.menuSelectKeys = ['2'];
-    else if(path == '/admin/visitor') this.menuSelectKeys = ['3'];
-    else if(path == '/admin/setting') this.menuSelectKeys = ['4'];
-
+    for (let i = 0; i < this.appMenu.length; i++) {
+      if(this.appMenu[i].path == path) {
+        this.menuSelectKeys = [ i.toString() ];
+        break;
+      }
+    }
     return this.menuSelectKeys;
   }
   menuClicked(v : { item, key, keyPath }) {
-    if(v.key == 5) {
+    if(this.appMenu[parseInt(v.key)].path == '/logout') {
       let that = this;
       this.$confirm({
         title: '您想要退出登录吗?',
@@ -123,12 +151,7 @@ export default class BackPages extends Vue {
         onCancel() { that.getMenuDefSelectIndex() },
       });
     }else {
-      switch(v.key){
-        case '1': this.$router.push({path:'/admin/'}); break;
-        case '2': this.$router.push({path:'/admin/crm'}); break;
-        case '3': this.$router.push({path:'/admin/visitor'}); break;
-        case '4': this.$router.push({path:'/admin/setting'}); break;
-      }
+      this.$router.push({ path: this.appMenu[parseInt(v.key)].path });
     }
   } 
 

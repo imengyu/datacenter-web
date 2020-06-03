@@ -28,19 +28,20 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import $ from 'jquery'
+import { State } from "vuex-class";
 
 @Component
 export default class FrontPages extends Vue {
   name = "FrontPages";
   menuSelectKeys = [];
-  headerTransparent = true;
+
+  @State(state => state.global.authed) authed : boolean;
+  @State(state => state.global.headerTransparent) headerTransparent : boolean;
 
   mounted() {
     this.getMenuDefSelectIndex();
     $('#loading').fadeOut();
   }
-
-
 
   getMenuDefSelectIndex() {
     let path = this.$route.path;

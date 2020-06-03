@@ -2,6 +2,7 @@ import config from './config'
 import { commonRequest, getAxios, init  } from './common';
 
 import auth from './moduls/auth'
+import product from './moduls/product'
 
 /**
  * 中央 API 封装
@@ -14,6 +15,7 @@ const api = {
   /* Moduls */
   
   auth,
+  product,
   
   /* Un moduled api */
 

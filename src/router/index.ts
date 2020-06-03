@@ -1,17 +1,20 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import IndexRedirect from '../views/IndexRedirect.vue'
-import DefaultNotFound from '../views/DefaultNotFound.vue'
+import IndexRedirect from '../views/web-page/IndexRedirect.vue'
+import DefaultNotFound from '../views/web-page/DefaultNotFound.vue'
 
-import Login from '../views/Login.vue'
-import Logout from '../views/Logout.vue'
+import Login from '../views/web-page/Login.vue'
+import Logout from '../views/web-page/Logout.vue'
 
-import Index from '../views/Index.vue'
-import About from '../views/About.vue'
-import Introduction from '../views/Introduction.vue'
-import ErrorPage from '../views/ErrorPage.vue'
 
-import Settings from '../views/Settings.vue'
+import About from '../views/web-page/About.vue'
+import Introduction from '../views/web-page/Introduction.vue'
+import ErrorPage from '../views/web-page/ErrorPage.vue'
+
+import Index from '../views/back-page/Index.vue'
+import Settings from '../views/back-page/Settings.vue'
+import Devices from '../views/back-page/Devices.vue'
+import Products from '../views/back-page/Products.vue'
 
 import BackPages from '../BackPages.vue'
 import FrontPages from '../FrontPages.vue'
@@ -70,15 +73,34 @@ export default new Router({
           path: '',
           name: 'Index',
           component: Index,
-          meta: { title: '后台首页' }
+          meta: { 
+            title: '后台首页',
+          }
         },
         {
           path: 'setting',
           name: 'Settings',
           component: Settings,
-          meta: { title: '系统设置' }
+          meta: { 
+            title: '系统设置',
+          }
         },
-        
+        {
+          path: 'devices',
+          name: 'Devices',
+          component: Devices,
+          meta: { 
+            title: '设备管理',
+          }
+        },
+        {
+          path: 'products',
+          name: 'Products',
+          component: Products,
+          meta: { 
+            title: '产品管理',
+          }
+        },
       ]
     },
     {

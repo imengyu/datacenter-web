@@ -22,7 +22,7 @@ declare global {
      * 格式化日期
      * @param formatStr 格式化字符串 支持 YYYY-MM-DD HH:ii:ss
      */
-    format(formatStr: string);
+    format(formatStr?: string);
   
     toGMTString() : string;
   }

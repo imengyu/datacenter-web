@@ -21,7 +21,7 @@ export default class Introduction extends Vue {
   name = "Introduction";
 
   mounted() {
-    (<any>this.$parent).headerTransparent = false;
+    this.$store.dispatch('global/setHeaderTransparent', false);
   }
 }
 </script>

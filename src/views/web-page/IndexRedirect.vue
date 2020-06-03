@@ -37,6 +37,7 @@ export default class IndexRedirect extends Vue {
     this.$router.push({ path: '/login' });
   }
   mounted() {
+    this.$store.dispatch('global/setHeaderTransparent', false);
     let first = localStorage.getItem('first');
     if(!first || first == '') this.showFirstTip = true;
     else this.$router.push({ path: '/login' });

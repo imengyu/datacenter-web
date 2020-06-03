@@ -5,6 +5,7 @@ const state = {
   authedUserName: null,
   lastAuthTime: null,
   lastNeedAuth: 0,
+  headerTransparent: false,
 };
 const getters = {
   authed(state) { return state.authed },
@@ -13,6 +14,7 @@ const getters = {
   authedUserName(state) { return state.authedUserName },
   lastAuthTime(state) { return state.lastAuthTime },
   lastNeedAuth(state) { return state.lastNeedAuth },
+  headerTransparent(state) { return state.headerTransparent },
 };
 const mutations = {
   authed(state, authed) { state.authed = authed; },
@@ -21,6 +23,7 @@ const mutations = {
   authedUserName(state, name) { state.authedUserName = name; },
   lastAuthTime(state, time) { state.lastAuthTime = time; },
   increaseLastNeedAuth(state) { state.lastNeedAuth++; },
+  headerTransparent(state, headerTransparent) { state.headerTransparent = headerTransparent; },
 };
 const actions = {
   setAuthed(context, authed) { context.commit('authed', authed); },
@@ -28,7 +31,8 @@ const actions = {
   setAuthedUserInfo(context, userInfo) { context.commit('authedUserInfo', userInfo); },
   setLastAuthTime(context, time) { context.commit('lastAuthTime', time); },
   setAuthedUserName(context, name) { context.commit('authedUserName', name); },
- 
+  setHeaderTransparent(context, headerTransparent) { context.commit('headerTransparent', headerTransparent); },
+
   requestReloadAuthStatus(context) {
     context.commit('increaseLastNeedAuth');
   },

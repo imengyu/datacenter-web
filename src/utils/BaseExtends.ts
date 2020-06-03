@@ -5,7 +5,7 @@ import CommonUtils from "./CommonUtils";
 //日期格式化
 Date.prototype.format = function (formatStr) {
   var pad = CommonUtils.pad;
-  var str = formatStr;
+  var str = formatStr || 'YYYY-MM-DD HH:ii:ss';
   str = str.replace(/yyyy|YYYY/, this.getFullYear().toString());
   str = str.replace(/MM/, pad(this.getMonth() + 1, 2));
   str = str.replace(/dd|DD/, pad(this.getDate(), 2));
@@ -17,6 +17,12 @@ Date.prototype.format = function (formatStr) {
   return str;
 }
 
+//日期格式化统一
+Date.prototype.toISOString = 
+Date.prototype.toJSON = 
+Date.prototype.toString = function () {
+  return this.format();
+}
 //字符串
 
 String.prototype.contains = function (str) {

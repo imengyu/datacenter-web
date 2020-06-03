@@ -13,8 +13,8 @@
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { State } from 'vuex-class';
 import md5 from 'md5';
-import api, { CommonApiError, CommonApiResult } from "../api";
-import CommonUtils from "../utils/CommonUtils";
+import api, { CommonApiError, CommonApiResult } from "../../api";
+import CommonUtils from "../../utils/CommonUtils";
 
 @Component
 export default class Logout extends Vue {
@@ -25,7 +25,7 @@ export default class Logout extends Vue {
   exitSending = true;
  
   mounted() {
-    (<any>this.$parent).headerTransparent = true;
+    this.$store.dispatch('global/setHeaderTransparent', true);
     this.logout();
   }
 
