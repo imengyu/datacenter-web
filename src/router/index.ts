@@ -11,13 +11,15 @@ import About from '../views/web-page/About.vue'
 import Introduction from '../views/web-page/Introduction.vue'
 import ErrorPage from '../views/web-page/ErrorPage.vue'
 
+import BackPages from '../BackPages.vue'
+import FrontPages from '../FrontPages.vue'
+
+
 import Index from '../views/back-page/Index.vue'
 import Settings from '../views/back-page/Settings.vue'
 import Devices from '../views/back-page/Devices.vue'
 import Products from '../views/back-page/Products.vue'
-
-import BackPages from '../BackPages.vue'
-import FrontPages from '../FrontPages.vue'
+import DeviceGroup from '../views/back-page/DeviceGroup.vue'
 
 Vue.use(Router)
 
@@ -99,6 +101,14 @@ export default new Router({
           component: Products,
           meta: { 
             title: '产品管理',
+          }
+        },
+        {
+          path: 'groups',
+          name: 'DeviceGroup',
+          component: DeviceGroup,
+          meta: { 
+            title: '分组管理',
           }
         },
       ]

@@ -30,8 +30,8 @@
       </a-form>
     </a-layout-header>
     <a-layout-content style="background-color: #fff">
-      <a-button type="primary" class="mb-3" @click="onAddNewProduct"><a-icon type="plus" />创建产品</a-button>
-      <a-button class="mb-3" :disabled="dataLoadStatus == 'loading'" @click="onRefesh"><a-icon type="redo" />刷新数据</a-button>
+      <a-button type="primary" class="mb-3" @click="onAddNewProduct"><a-icon type="plus"/>创建产品</a-button>
+      <a-button class="mb-3" :disabled="dataLoadStatus == 'loading'" @click="onRefesh"><a-icon type="redo"/></a-button>
       <a-config-provider>
         <template v-slot:renderEmpty>
           <empty-view v-if="searchValues.length>0" 
@@ -133,11 +133,6 @@ export default class Products extends Vue {
     wrapperCol: { span: 20 },
   };
   columns = [
-    {
-      title: '编号',
-      dataIndex: 'id',
-      key: 'id',
-    },
     {
       title: '产品名称',
       dataIndex: 'name',
@@ -264,14 +259,7 @@ export default class Products extends Vue {
   onAddNewProduct() {
     this.editingData = true;
     this.editingIsNew = true;
-    this.editingObject = {
-      id: 0,
-      name: "",
-      productKey:  "",
-      createAt: new Date(),
-      type:  "",
-      userId: this.authedUserInfo.id
-    };
+    this.editingObject = new Product();
     this.editingSubmiting = false;
     this.updateEditFromValues();
   }

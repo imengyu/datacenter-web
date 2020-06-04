@@ -4,7 +4,15 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-
+.disply-inline-block {
+  display: inline-block;
+}
+.disply-inline {
+  display: inline;
+}
+.disply-none {
+  display: none;
+}
 
 .align-baseline {
   vertical-align: baseline !important;

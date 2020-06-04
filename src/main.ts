@@ -4,15 +4,21 @@ import router from './router'
 import store from './store'
 import Antd from 'ant-design-vue';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
+import VueClipboard from 'vue-clipboard2'
 import NProgress from 'nprogress'
 import $ from 'jquery'
 import api from './api';
 import EmptyView from './components/EmptyView.vue';
+import ErrorView from './components/ErrorView.vue';
+import ShowValueOrNull from './components/ShowValueOrNull.vue';
+import ShowInList from './components/ShowInList.vue';
 
 import 'ant-design-vue/dist/antd.css';
 import './utils/BaseExtends'
 import './assets/scss/root.scss';
 
+ 
+Vue.use(VueClipboard)
 Vue.use(Antd);
 
 Vue.config.productionTip = false
@@ -88,6 +94,9 @@ function initAxios() : AxiosInstance {
 }
 function initCompoents() {
   Vue.component('empty-view', EmptyView);
+  Vue.component('error-view', ErrorView);
+  Vue.component('show-value-or-null', ShowValueOrNull);
+  Vue.component('show-in-list', ShowInList);
 }
 
 createApp();

@@ -15,8 +15,6 @@
     ],
     "sourceMap": true,
     "pretty": true,
-    "strict": false,
-    "esModuleInterop": true,
     "baseUrl": ".",
     "plugins": [{ "name": "ts-vue-plugin" }],
     "paths": {

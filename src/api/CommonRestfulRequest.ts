@@ -52,6 +52,8 @@ export class CommonRestfulRequest {
     return buildParams(params);
   }
 
+  protected getApiPath() { return config.getApiPath() }
+
   /**
    * 请求分页
    * @param page 页码 0 开始

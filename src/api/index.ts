@@ -1,11 +1,13 @@
 import config from './config'
-import { commonRequest, getAxios, init  } from './common';
+import { getAxios, init  } from './common';
 
 import auth from './moduls/auth'
 import product from './moduls/product'
+import deviceGroup from './moduls/deviceGroup'
+import device from './moduls/device'
 
 /**
- * 中央 API 封装
+ * API 封装
  */
 const api = {
 
@@ -16,6 +18,8 @@ const api = {
   
   auth,
   product,
+  deviceGroup,
+  device,
   
   /* Un moduled api */
 

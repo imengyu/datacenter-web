@@ -200,3 +200,49 @@ a {
     color: #0088e2;
   }
 }
+
+.prop-card {
+  padding: 10px 15px;
+  background-color: #f3f3f3;
+  border-radius: 10px;
+}
+.center-view {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+.inline-show-prop {
+
+  display: inline-flex;
+  font-weight: 400;
+  font-size: 12px;
+  flex-shrink: 0;
+  margin-bottom: 8px;
+  line-height: 20px;
+
+  &.block {
+    width: 100%;
+  }
+
+  > label {
+    color: #888;
+    margin-right: 22px;
+    min-width: 100px;
+    word-break: keep-all;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  > div {
+    color: #555;
+    margin-right: 8px;
+    flex-shrink: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-block;
+  }
+
+
+}
